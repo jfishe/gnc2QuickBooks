@@ -60,9 +60,9 @@ with open('Integrity-test2-Asset.csv') as csvinfile:
             outrow['DOCNUM'] = docnum
             outrow['TRNSTYPE'] = trnstype
             if row['From Num.']:
-                outrow['AMOUNT'] = -float(row['From Num.'].replace(',', ''))
+                outrow['AMOUNT'] = float(row['From Num.'].replace(',', ''))
             else:
-                outrow['AMOUNT'] = -float(row['To Num.'].replace(',', ''))
+                outrow['AMOUNT'] = float(row['To Num.'].replace(',', ''))
         if split is True and row['Type'] == 'S':
             outrow['!TRNS'] = 'TRNS'
             split = False

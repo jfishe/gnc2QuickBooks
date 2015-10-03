@@ -21,8 +21,8 @@ with open('bank.iif') as csvfile:
 
 gnc_accounts = list(set(gnc_accounts))
 gnc_diff = []
-for item in QB_accounts:
-    if item not in gnc_accounts:
+for item in gnc_accounts:
+    if item not in QB_accounts:
         gnc_diff.append(item)
 gnc_diff = set(gnc_diff)
 for item in gnc_diff:
