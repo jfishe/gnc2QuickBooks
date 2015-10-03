@@ -10,12 +10,12 @@ with open('Book2.csv') as csvfile:
         QB_accounts.append(row['Account'])
 
 gnc_accounts = []
-with open('liability.iif', 'wb') as csvfile:
-    reader = csv.DictReader(csvfile)
+with open('liability.iif') as csvfile:
+    reader = csv.DictReader(csvfile, dialect='excel-tab')
     for row in reader:
         gnc_accounts.append(row['ACCNT'])
-with open('bank.iif', 'wb') as csvfile:
-    reader = csv.DictReader(csvfile)
+with open('bank.iif') as csvfile:
+    reader = csv.DictReader(csvfile, dialect='excel-tab')
     for row in reader:
         gnc_accounts.append(row['ACCNT'])
 
