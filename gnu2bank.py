@@ -1,17 +1,23 @@
 #!/usr/bin/python
 import csv
 
+
 hdr1 = ('!TRNS', 'TRNSID', 'TRNSTYPE', 'DATE', 'ACCNT',
         'NAME', 'AMOUNT', 'DOCNUM', 'MEMO', 'CLEAR')
 hdr2 = ('!SPL', 'SPLID', 'TRNSTYPE', 'DATE', 'ACCNT', 'NAME',
         'AMOUNT', 'DOCNUM', 'MEMO', 'CLEAR')
 
 gnchdr = ('Date', 'Account Name', 'Number', 'Description', 'Notes', 'Memo',
-          'Category', 'Type', 'Action', 'Reconcile', 'To With Sym',
-          'From With Sym', 'To Num.', 'From Num.', 'To Rate/Price',
-          'From Rate/Price')
+        'Category', 'Type', 'Action', 'Reconcile', 'To With Sym',
+        'From With Sym', 'To Num.', 'From Num.', 'To Rate/Price',
+        'From Rate/Price')
 
-usetrns = dict(Date='DATE', Category='ACCNT', Description='NAME', Number='DOCNUM', Memo='MEMO', Reconcile='CLEAR')
+usetrns = { 'Date':'DATE',\
+            'Category':'ACCNT',\
+            'Description':'NAME',\
+            'Number':'DOCNUM',\
+            'Memo':'MEMO',\
+            'Reconcile':'CLEAR' }
 
 openhdr = '!TRNS'
 splhdr = '!SPL'
@@ -30,7 +36,8 @@ outrow = {}
 for i, key in enumerate(hdr1):
     outrow[str(key)] = hdr2[i]
 out.append(outrow)
-outrow = {str(openhdr): endhdr}
+outrow = {}
+outrow[str(openhdr)] = endhdr
 out.append(outrow)
 
 with open('Integrity-test2-Asset.csv') as csvinfile:
@@ -60,9 +67,9 @@ with open('Integrity-test2-Asset.csv') as csvinfile:
             outrow['DOCNUM'] = docnum
             outrow['TRNSTYPE'] = trnstype
             if row['From Num.']:
-                outrow['AMOUNT'] = -float(row['From Num.'].replace(',', ''))
+                outrow['AMOUNT'] = -float(row['From Num.'].replace(',',''))
             else:
-                outrow['AMOUNT'] = -float(row['To Num.'].replace(',', ''))
+                outrow['AMOUNT'] = -float(row['To Num.'].replace(',',''))
         if split is True and row['Type'] == 'S':
             outrow['!TRNS'] = 'TRNS'
             split = False
@@ -73,13 +80,14 @@ with open('Integrity-test2-Asset.csv') as csvinfile:
         if transaction is True:
             transaction = False
             if firstrans is False:
-                out.append({str(openhdr): endtrns})
+                out.append({str(openhdr):endtrns})
             else:
                 firstrans = False
-    out.append({str(openhdr): endtrns})
+    out.append({str(openhdr):endtrns})
+
 
 row = {}
-with open('test.csv', 'wb') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=hdr1, dialect='excel-tab')
-    for row in out:
-        writer.writerow(row)
+with open('bank.csv', 'wb') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=hdr1, dialect='excel-tab')
+        for row in out:
+            writer.writerow(row)

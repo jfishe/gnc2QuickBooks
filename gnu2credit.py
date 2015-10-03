@@ -96,7 +96,7 @@ with open('Integrity-test2-Liability.csv') as csvinfile:
     out.append({str(openhdr): endtrns})
 
 row = {}
-with open('test1.csv', 'wb') as csvfile:
+with open('liability.csv', 'wb') as csvfile:
     writer = csv.DictWriter(csvfile, fieldnames=hdr1, dialect='excel-tab')
     for row in out:
         writer.writerow(row)
