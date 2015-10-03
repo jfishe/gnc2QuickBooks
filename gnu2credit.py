@@ -30,8 +30,7 @@ outrow = {}
 for i, key in enumerate(hdr1):
     outrow[str(key)] = hdr2[i]
 out.append(outrow)
-outrow = {}
-outrow[str(openhdr)] = endhdr
+outrow = {str(openhdr): endhdr}
 out.append(outrow)
 
 with open('Integrity-test2-Liability.csv') as csvinfile:
@@ -40,6 +39,7 @@ with open('Integrity-test2-Liability.csv') as csvinfile:
     name = ''
     date = ''
     docnum = ''
+    account_name = ''
     transaction = False
     firstrans = True
     split = False
