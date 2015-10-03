@@ -58,7 +58,7 @@ with open('Integrity-test2-Asset.csv') as csvinfile:
             outrow['NAME'] = name
             outrow['DATE'] = date
             outrow['DOCNUM'] = docnum
-            outrow['TRNSTYPE'] = trnstype
+#            outrow['TRNSTYPE'] = trnstype # not needed QB figures out better itself.
             if row['From Num.']:
                 outrow['AMOUNT'] = float(row['From Num.'].replace(',', ''))
             else:
