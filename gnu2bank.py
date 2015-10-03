@@ -87,7 +87,7 @@ with open('Integrity-test2-Asset.csv') as csvinfile:
 
 
 row = {}
-with open('bank.csv', 'wb') as csvfile:
+with open('bank.iif', 'wb') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=hdr1, dialect='excel-tab')
         for row in out:
             writer.writerow(row)
